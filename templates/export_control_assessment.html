@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Export Control Assessment</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='export_control_assessment_style.css') }}">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div id="branding">
+                <h1>Export Control Assessment</h1>
+            </div>
+        </div>
+    </header>
+    <div class="container">
+        <section id="main">
+            <h2>Generate Export Control Assessment</h2>
+            <form id="assessment-form">
+                <div>
+                    <label for="technology">Technology Details:</label>
+                    <textarea id="technology" name="technology" rows="10" cols="80"></textarea>
+                </div>
+                <div>
+                    <label for="template">Export Control Template:</label>
+                    <textarea id="template" name="template" rows="10" cols="80" readonly>{{ template }}</textarea>
+                </div>
+                <div>
+                    <label for="requirements">Export Control Requirements:</label>
+                    <textarea id="requirements" name="requirements" rows="10" cols="80">{{ requirements }}</textarea>
+                </div>
+                <button type="button" id="generate-assessment-btn">Generate Assessment</button>
+            </form>
+            <h2>Assessment Report</h2>
+            <div id="assessment-report"></div>
+        </section>
+    </div>
+    <script>
+        function generateAssessment() {
+            const technology = document.getElementById('technology').value;
+            const requirements = document.getElementById('requirements').value;
+            const template = document.getElementById('template').value;
+
+            fetch('/generate_export_control_assessment', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ technology, requirements, template })
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('assessment-report').innerHTML = data.assessment;
+            })
+            .catch(error => console.error('Error:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            const generateBtn = document.getElementById('generate-assessment-btn');
+            if (generateBtn) {
+                generateBtn.addEventListener('click', generateAssessment);
+                console.log('Generate Assessment button initialized');
+            } else {
+                console.error('Generate Assessment button not found');
+            }
+        });
+    </script>
+</body>
+</html>

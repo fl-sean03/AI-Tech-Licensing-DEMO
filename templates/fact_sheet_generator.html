@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fact Sheet Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='fact_sheet_generator_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <main>
+            <section class="input-section">
+                <h2>Technology Details</h2>
+                <textarea id="technology-input" placeholder="Enter technology details..."></textarea>
+                <button id="generate-btn">Generate Fact Sheet</button>
+                <h2>Generated Fact Sheet</h2>
+                <div id="fact-sheet-output">{{ fact_sheet|safe }}</div>
+            </section>
+            <section class="template-section">
+                <h2>Template</h2>
+                <textarea id="template-input">{{ template }}</textarea>
+            </section>
+        </main>
+    </div>
+
+    <script>
+        console.log('Script loaded');  // Debugging log
+        
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM content loaded');  // Debugging log
+            const generateBtn = document.getElementById('generate-btn');
+            const technologyInput = document.getElementById('technology-input');
+            const templateInput = document.getElementById('template-input');
+            const factSheetOutput = document.getElementById('fact-sheet-output');
+
+            console.log('generateBtn:', generateBtn);  // Debugging log
+            console.log('technologyInput:', technologyInput);  // Debugging log
+            console.log('templateInput:', templateInput);  // Debugging log
+            console.log('factSheetOutput:', factSheetOutput);  // Debugging log
+
+            if (generateBtn && technologyInput && templateInput && factSheetOutput) {
+                console.log('Elements found');  // Debugging log
+                generateBtn.addEventListener('click', function() {
+                    console.log('Generate Fact Sheet button pressed');  // Debugging log
+                    const technology = technologyInput.value;
+                    const template = templateInput.value;
+
+                    const formData = new FormData();
+                    formData.append('template', template);
+                    formData.append('technology', technology);
+
+                    fetch('/generate_fact_sheet', {
+                        method: 'POST',
+                        body: formData
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log('Fact sheet generated:', data.fact_sheet);  // Debugging log
+                        factSheetOutput.innerHTML = data.fact_sheet;
+                    })
+                    .catch(error => console.error('Error:', error));
+                });
+            } else {
+                console.error('One or more elements not found');  // Debugging log
+            }
+        });
+    </script>
+</body>
+</html>

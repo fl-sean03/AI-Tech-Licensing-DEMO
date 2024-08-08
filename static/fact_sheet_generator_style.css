@@ -1,0 +1,61 @@
+/* Add your CSS styles here */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    overflow: auto; /* Allow scrolling */
+}
+
+.resizer {
+    width: 5px;
+    cursor: col-resize;
+    background-color: #ccc;
+    border-left: 1px solid #ddd;
+    border-right: 1px solid #ddd;
+}
+
+.section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin: 10px;
+    overflow: auto; /* Allow scrolling within sections */
+}
+
+.section {
+    flex: 1; /* Ensure all columns start the same size */
+}
+
+header {
+    background: #333;
+    color: #fff;
+    padding-top: 30px;
+    min-height: 70px;
+    border-bottom: #77aaff 3px solid;
+}
+
+header a {
+    color: #fff;
+    text-decoration: none;
+    text-transform: uppercase;
+    font-size: 16px;
+}
+
+#fact-sheet-output {
+    background: #fff;
+    padding: 20px;
+    margin-top: 20px;
+    border: #ccc 1px solid;
+}

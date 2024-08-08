@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chat with LLM</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='index_style.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="section" id="section1">
+            <h2>Tools</h2>
+            <div id="tools-container"></div>
+        </div>
+        <div class="resizer" id="resizer1"></div>
+        <div class="section" id="section2">
+            <h1>Chat with LLM</h1>
+            <form id="chat-form">
+                <label for="message">Your Message:</label>
+                <input type="text" id="message" name="message" required>
+                <button type="submit">Send</button>
+            </form>
+            <div id="chat-history" class="chat-history"></div>
+        </div>
+        <div class="resizer" id="resizer2"></div>
+        <div class="section" id="section3">
+            <h2 id="tool-title">No Tool Selected</h2>
+            <p id="tool-description">Please select a tool from the list to see its details here.</p>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('chat-form').addEventListener('submit', function(event) {
+            event.preventDefault();
+            console.log("Chat button pressed");
+            const message = document.getElementById('message').value;
+            fetch('/chat_ajax', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({ message: message })
+            })
+            .then(response => response.json())
+            .then(data => {
+                const chatHistory = document.getElementById('chat-history');
+                chatHistory.innerHTML += `<h2>Your Input:</h2><p>${data.user_input}</p><h2>LLM Response:</h2><p>${data.response}</p>`;
+                document.getElementById('message').value = '';
+            })
+            .catch(error => console.error('Error:', error));
+        });
+
+        function displayToolDetails(title, description) {
+            document.getElementById('tool-title').innerText = title;
+            document.getElementById('tool-description').innerText = description;
+        }
+
+        const toolInitializers = {
+            "Technology Fact Sheet Generator": function() {
+                console.log('Initializing Fact Sheet Generator');
+                const generateBtn = document.getElementById('generate-btn');
+                const technologyInput = document.getElementById('technology-input');
+                const templateInput = document.getElementById('template-input');
+                const factSheetOutput = document.getElementById('fact-sheet-output');
+
+                console.log('generateBtn:', generateBtn);
+                console.log('technologyInput:', technologyInput);
+                console.log('templateInput:', templateInput);
+                console.log('factSheetOutput:', factSheetOutput);
+
+                if (generateBtn && technologyInput && templateInput && factSheetOutput) {
+                    console.log('Elements found');
+                    generateBtn.addEventListener('click', function() {
+                        console.log('Generate Fact Sheet button pressed');
+                        const technology = technologyInput.value;
+                        const template = templateInput.value;
+
+                        const formData = new FormData();
+                        formData.append('template', template);
+                        formData.append('technology', technology);
+
+                        fetch('/generate_fact_sheet', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Fact sheet generated:', data.fact_sheet);
+                            factSheetOutput.innerHTML = data.fact_sheet;
+                        })
+                        .catch(error => console.error('Error:', error));
+                    });
+                } else {
+                    console.error('One or more elements not found');
+                }
+            },
+            "Export Control Assessment": function() {
+                console.log('Initializing Export Control Assessment');
+                const generateBtn = document.getElementById('generate-assessment-btn');
+                const technologyInput = document.getElementById('technology');
+                const requirementsInput = document.getElementById('requirements');
+                const templateInput = document.getElementById('template');
+                const assessmentOutput = document.getElementById('assessment-report');
+
+                console.log('generateBtn:', generateBtn);
+                console.log('technologyInput:', technologyInput);
+                console.log('requirementsInput:', requirementsInput);
+                console.log('templateInput:', templateInput);
+                console.log('assessmentOutput:', assessmentOutput);
+
+                if (generateBtn && technologyInput && requirementsInput && templateInput && assessmentOutput) {
+                    console.log('Elements found');
+                    generateBtn.addEventListener('click', function() {
+                        console.log('Generate Export Control Assessment button pressed');
+                        const technology = technologyInput.value;
+                        const requirements = requirementsInput.value;
+                        const template = templateInput.value;
+
+                        const formData = new FormData();
+                        formData.append('technology', technology);
+                        formData.append('requirements', requirements);
+                        formData.append('template', template);
+
+                        fetch('/generate_export_control_assessment', {
+                            method: 'POST',
+                            body: formData
+                        })
+                        .then(response => response.json())
+                        .then(data => {
+                            console.log('Assessment generated:', data.assessment);
+                            assessmentOutput.innerHTML = data.assessment;
+                        })
+                        .catch(error => console.error('Error:', error));
+                    });
+                } else {
+                    console.error('One or more elements not found');
+                }
+            }
+        };
+
+        function loadTools() {
+            fetch('/tools')
+                .then(response => response.json())
+                .then(tools => {
+                    const toolsContainer = document.getElementById('tools-container');
+                    toolsContainer.innerHTML = '';
+                    tools.forEach(tool => {
+                        const button = document.createElement('button');
+                        button.innerText = tool.title;
+                        button.onclick = () => {
+                            console.log(`${tool.title} button pressed`);
+                            fetch(`/tool_html/${tool.endpoint}`)
+                                .then(response => response.text())
+                                .then(html => {
+                                    document.getElementById('tool-title').innerText = tool.title;
+                                    document.getElementById('tool-description').innerHTML = html;
+                                    if (toolInitializers[tool.title]) {
+                                        toolInitializers[tool.title]();
+                                    }
+                                    if (tool.title === "Export Control Assessment") {
+                                        document.querySelector('header').style.display = 'none';
+                                    } else {
+                                        document.querySelector('header').style.display = 'block';
+                                    }
+                                })
+                                .catch(error => console.error(`Error loading ${tool.title}:`, error));
+                        };
+                        toolsContainer.appendChild(button);
+                    });
+                })
+                .catch(error => console.error('Error loading tools:', error));
+        }
+
+        document.addEventListener('DOMContentLoaded', loadTools);
+
+        const resizers = document.querySelectorAll('.resizer');
+        let currentResizer;
+        let startX, startWidth1, startWidth2;
+        const minWidth = 150; // Minimum width for the sections
+
+        for (let resizer of resizers) {
+            resizer.addEventListener('mousedown', function(e) {
+                currentResizer = e.target;
+                startX = e.clientX;
+                const section1 = document.getElementById('section1');
+                const section2 = document.getElementById('section2');
+                const section3 = document.getElementById('section3');
+
+                if (currentResizer.id === 'resizer1') {
+                    startWidth1 = section1.getBoundingClientRect().width;
+                    startWidth2 = section2.getBoundingClientRect().width;
+                } else if (currentResizer.id === 'resizer2') {
+                    startWidth1 = section2.getBoundingClientRect().width;
+                    startWidth2 = section3.getBoundingClientRect().width;
+                }
+
+                document.addEventListener('mousemove', resize);
+                document.addEventListener('mouseup', stopResize);
+            });
+        }
+
+        function resize(e) {
+            const section1 = document.getElementById('section1');
+            const section2 = document.getElementById('section2');
+            const section3 = document.getElementById('section3');
+
+            if (currentResizer.id === 'resizer1') {
+                const newWidth1 = Math.max(minWidth, startWidth1 + (e.clientX - startX));
+                const newWidth2 = Math.max(minWidth, startWidth2 - (e.clientX - startX));
+                section1.style.flex = `0 0 ${newWidth1}px`;
+                section2.style.flex = `0 0 ${newWidth2}px`;
+            } else if (currentResizer.id === 'resizer2') {
+                const newWidth1 = Math.max(minWidth, startWidth1 + (e.clientX - startX));
+                const newWidth2 = Math.max(minWidth, startWidth2 - (e.clientX - startX));
+                section2.style.flex = `0 0 ${newWidth1}px`;
+                section3.style.flex = `0 0 ${newWidth2}px`;
+            }
+        }
+
+        function stopResize() {
+            document.removeEventListener('mousemove', resize);
+            document.removeEventListener('mouseup', stopResize);
+        }
+    </script>
+</body>
+</html>

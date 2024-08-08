@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fact Sheet Generator</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const technology = document.getElementById('technology-input').value;
+            const template = document.getElementById('template-input').value;
+            const formData = new FormData();
+            formData.append('template', template);
+            formData.append('technology', technology);
+
+            fetch('/generate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('fact-sheet-output').innerHTML = data.fact_sheet;
+            });
+        });
+    });
+</script>
+</head>
+<body>
+    <div class="container">
+        <main>
+            <section class="input-section">
+                <h2>Technology Details</h2>
+                <textarea id="technology-input" placeholder="Enter technology details..."></textarea>
+                <button id="generate-btn">Generate Fact Sheet</button>
+            </section>
+            <section class="output-section">
+                <h2>Generated Fact Sheet</h2>
+                <div id="fact-sheet-output"></div>
+            </section>
+            <section class="template-section">
+                <h2>Template</h2>
+                <textarea id="template-input">{{ template }}</textarea>
+            </section>
+        </main>
+    </div>
+    <script>
+        document.getElementById('generate-btn').addEventListener('click', function() {
+            const technology = document.getElementById('technology-input').value;
+            const template = document.getElementById('template-input').value;
+            const formData = new FormData();
+            formData.append('technology', technology);
+            formData.append('template', template);
+
+            fetch('/generate', {
+                method: 'POST',
+                body: formData
+            })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('fact-sheet-output').innerHTML = marked(data.fact_sheet);
+            });
+        });
+    </script>
+</body>
+</html>

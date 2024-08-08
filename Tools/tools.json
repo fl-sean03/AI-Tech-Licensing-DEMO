@@ -1,0 +1,12 @@
+[
+    {
+        "title": "Technology Fact Sheet Generator",
+        "description": "This tool generates fact sheets for various technologies.",
+        "endpoint": "fact_sheet_generator"
+    },
+    {
+        "title": "Export Control Assessment",
+        "description": "This tool assesses export control requirements for various technologies.",
+        "endpoint": "export_control_assessment"
+    }
+]

@@ -1,0 +1,72 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    margin: 0;
+    padding: 0;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+.container {
+    display: flex;
+    flex-direction: row;
+    height: 100%;
+    width: 100%;
+    padding: 20px;
+    box-sizing: border-box;
+}
+.section {
+    flex: 1;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    overflow: auto;
+    min-width: 150px; /* Set a minimum width for the sections */
+}
+.section h2, .section h1 {
+    color: #333;
+}
+.section button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+}
+.section button:hover {
+    background-color: #0056b3;
+}
+.section form {
+    display: flex;
+    flex-direction: column;
+}
+.section form label, .section form input, .section form button {
+    margin: 10px 0;
+}
+.section form input {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+.chat-history {
+    margin-top: 20px;
+}
+.resizer {
+    width: 10px;
+    min-width: 10px; /* Ensure the resizer has a minimum width */
+    background: #ccc;
+    cursor: ew-resize;
+    position: relative;
+    z-index: 1;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}

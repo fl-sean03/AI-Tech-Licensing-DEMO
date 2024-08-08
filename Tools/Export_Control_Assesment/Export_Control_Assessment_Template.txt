@@ -1,0 +1,109 @@
+# Export Control Assessment Report
+
+## Technology Details
+- **Description**: [Detailed description of the technology provided by the user]
+- **Primary Use**: [Primary use and applications of the technology]
+- **Technical Specifications**: [Key technical specifications of the technology]
+
+## Export Control Requirements
+### Export Administration Regulations (EAR)
+- **Compliance with EAR**:
+  - **Classification**: [Classification of the technology under EAR, including ECCNs]
+  - **License Requirements**: [Details on license requirements and any applicable license exceptions]
+- **Commerce Control List (CCL)**:
+  - **Controlled Items**: [Specific items listed on the CCL that are relevant to the technology]
+
+### International Traffic in Arms Regulations (ITAR)
+- **Compliance with ITAR**:
+  - **USML Categories**: [USML categories under which the technology falls]
+  - **License Requirements**: [Details on ITAR licensing requirements and exemptions]
+
+### Sanctions and Embargoes
+- **Sanctioned Countries**: [List of any sanctioned or embargoed countries relevant to the technology]
+- **Restricted Parties**: [Screening results for end-users against restricted parties lists such as the SDN List and Entity List]
+
+### Missile Technology Control Regime (MTCR)
+- **MTCR Compliance**:
+  - **Controlled Items**: [Items controlled under the MTCR relevant to the technology]
+  - **License Requirements**: [Details on MTCR licensing requirements]
+
+### Weapons of Mass Destruction (WMD) Provisions
+- **WMD Compliance**:
+  - **Controlled Items**: [Items related to WMDs that are part of the technology]
+  - **License Requirements**: [Details on WMD-related licensing requirements]
+
+### Dual-Use Technology
+- **Dual-Use Classification**: [Classification of the technology as dual-use]
+- **License Requirements**: [Details on license requirements for dual-use items]
+
+### Encryption Regulations
+- **Encryption Compliance**:
+  - **Controlled Items**: [Encryption items relevant to the technology]
+  - **License Requirements**: [Details on encryption-related license requirements]
+
+### Deemed Exports
+- **Deemed Export Compliance**:
+  - **Controlled Items**: [Technology elements subject to deemed export regulations]
+  - **License Requirements**: [Details on deemed export license requirements]
+
+### End-Use and End-User Controls
+- **End-Use Compliance**:
+  - **End-Use**: [Details on end-use screening and compliance]
+  - **End-User**: [Details on end-user screening and compliance]
+
+### Export Documentation and Recordkeeping
+- **Documentation Requirements**:
+  - **Required Documents**: [List of required export documentation]
+  - **Recordkeeping Requirements**: [Details on recordkeeping practices and retention periods]
+
+### Training and Compliance Programs
+- **Training Programs**:
+  - **Employee Training**: [Details on training programs for employees]
+  - **Compliance Programs**: [Details on internal compliance programs and audits]
+
+### Reporting Requirements
+- **Reporting Obligations**:
+  - **Violation Reporting**: [Details on reporting violations of export control regulations]
+  - **Regular Reporting**: [Details on regular reporting obligations to regulatory bodies]
+
+### International Collaborations and Technical Data Sharing
+- **Collaboration Compliance**:
+  - **Technical Data**: [Details on sharing technical data with foreign entities]
+  - **License Requirements**: [Details on Technical Assistance Agreements (TAA) and other licenses]
+
+### Emerging and Foundational Technologies
+- **Emerging Tech Compliance**:
+  - **Controlled Items**: [Details on emerging and foundational technologies relevant to the technology]
+  - **License Requirements**: [Details on licensing requirements for emerging technologies]
+
+### Compliance with Foreign Regulations
+- **Foreign Regulations Compliance**:
+  - **Destination Countries**: [Details on compliance with foreign export control regulations]
+  - **Dual Compliance**: [Details on ensuring compliance with both U.S. and foreign regulations]
+
+### Technology-Specific Requirements
+- **Specific Requirements**:
+  - **Biotechnology**: [Compliance details specific to biotechnology]
+  - **Aerospace**: [Compliance details specific to aerospace technology]
+  - **Other Technologies**: [Compliance details specific to other relevant technologies]
+
+## Assessment
+### Potential Concerns
+- **Concern 1**: [Detailed description of the first potential concern related to export control]
+- **Concern 2**: [Detailed description of the second potential concern]
+- **Concern 3**: [Detailed description of the third potential concern]
+
+### Associated Risks
+- **Risk 1**: [Detailed description of the first associated risk]
+- **Risk 2**: [Detailed description of the second associated risk]
+- **Risk 3**: [Detailed description of the third associated risk]
+
+## Recommendations
+- **Recommendation 1**: [First recommendation to mitigate concern/risk]
+- **Recommendation 2**: [Second recommendation to mitigate concern/risk]
+- **Recommendation 3**: [Third recommendation to mitigate concern/risk]
+
+## Conclusion
+- **Summary**: [Summary of the findings and overall assessment]
+- **Next Steps**: [Recommendations for next steps to ensure compliance]
+
